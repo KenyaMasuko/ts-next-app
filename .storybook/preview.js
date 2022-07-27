@@ -54,6 +54,6 @@ Object.defineProperty(NextImage, "default", {
 });
 
 Object.defineProperty(NextImage, "__esModule", {
-	configurable: true,
+	// configurable: true,
 	value: true,
 });
