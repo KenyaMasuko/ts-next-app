@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
 import { theme } from "themes";
-import { Responsive, ResponsiveProp } from "types";
+import type { Responsive, ResponsiveProp } from "types";
 
 //Themeの型
 export type AppTheme = typeof theme;
@@ -66,7 +66,7 @@ export function toPropValue<T>(
 					prop[responsiveKey],
 					theme
 				)}`;
-				result.push(`@media (min-width: ${breakpoint}) ${style}`);
+				result.push(`@media (min-width: ${breakpoint}) ${style};`);
 			}
 		}
 		return result.join("\n");
@@ -83,7 +83,7 @@ const SPACE_KEYS = new Set([
 	"padding",
 	"padding-top",
 	"padding-right",
-	"padding-bottm",
+	"padding-bottom",
 	"padding-left",
 ]);
 const COLOR_KEYS = new Set(["color", "background-color"]);
@@ -135,6 +135,8 @@ function toThemeValueIfNeeded<T>(propKey: string, value: T, theme?: AppTheme) {
 	) {
 		return theme.lineHeights[value];
 	}
+
+	return value;
 }
 
 function isResponsivePropType<T>(prop: any): prop is ResponsiveProp<T> {
@@ -167,12 +169,14 @@ function isLetterSpacingThemeKeys(
 	prop: any,
 	theme: AppTheme
 ): prop is LetterSpacingThemeKeys {
-	return Object.keys(theme.colors).filter((key) => key == prop).length > 0;
+	return (
+		Object.keys(theme.letterSpacings).filter((key) => key == prop).length > 0
+	);
 }
 
 function isLineHeightThemeKeys(
 	prop: any,
 	theme: AppTheme
 ): prop is LineHeightThemeKeys {
-	return Object.keys(theme.colors).filter((key) => key == prop).length > 0;
+	return Object.keys(theme.lineHeights).filter((key) => key == prop).length > 0;
 }
