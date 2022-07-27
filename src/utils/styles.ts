@@ -66,9 +66,7 @@ export function toPropValue<T>(
 					prop[responsiveKey],
 					theme
 				)};`;
-				result.push(
-					`@media screen and (min-width: ${breakpoint}) ${{ style }}`
-				);
+				result.push(`@media screen and (min-width: ${breakpoint}) {${style}}`);
 			}
 		}
 		return result.join("\n");
