@@ -71,7 +71,7 @@ export function toPropValue<T>(
 		}
 		return result.join("\n");
 	}
-	return `${propKey}: ${toThemeValueIfNeeded(propKey, prop, theme)}`;
+	return `${propKey}: ${toThemeValueIfNeeded(propKey, prop, theme)};`;
 }
 
 const SPACE_KEYS = new Set([
