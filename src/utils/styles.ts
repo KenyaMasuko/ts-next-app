@@ -51,7 +51,7 @@ export function toPropValue<T>(
 						propKey,
 						prop[responsiveKey],
 						theme
-					)}`
+					)};`
 				);
 			} else if (
 				responsiveKey === "sm" ||
@@ -65,8 +65,10 @@ export function toPropValue<T>(
 					propKey,
 					prop[responsiveKey],
 					theme
-				)}`;
-				result.push(`@media (min-width: ${breakpoint}) ${style};`);
+				)};`;
+				result.push(
+					`@media screen and (min-width: ${breakpoint}) ${{ style }}`
+				);
 			}
 		}
 		return result.join("\n");
