@@ -17,6 +17,7 @@ const nextConfig = {
 
 		return compilerConfig;
 	})(),
+	//CORSを避ける
 	async rewrites() {
 		return [
 			{
