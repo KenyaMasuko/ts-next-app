@@ -13,6 +13,7 @@ import {
 // ボタンのバリアント
 export type ButtonVariant = "primary" | "secondary" | "danger";
 
+//ボタンに渡すpropsの型
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 	variant?: ButtonVariant;
 	fontSize?: Responsive<FontSize>;
@@ -103,8 +104,10 @@ const Button = styled.button<ButtonProps>`
 		// バリアントのスタイルの適用
 		if (variant && variants[variant]) {
 			const styles = [];
+			//colorが渡って来なければvariantに設定された初期のcolorが渡ってくる
 			!color &&
 				styles.push(toPropValue("color", variants[variant].color, theme));
+			//backgroundColorが渡って来なければvariantに設定された初期のbackgroundColorが渡ってくる
 			!backgroundColor &&
 				styles.push(
 					toPropValue(
@@ -113,6 +116,7 @@ const Button = styled.button<ButtonProps>`
 						theme
 					)
 				);
+			//pseudoClassが渡って来なければvariantに設定された初期のpseudoClassが渡ってくる
 			!pseudoClass &&
 				styles.push(
 					`&:hover {
