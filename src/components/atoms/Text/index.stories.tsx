@@ -58,70 +58,70 @@ export default {
 				type: { summary: "string" },
 			},
 		},
-		m: {
+		margin: {
 			control: { type: "number" },
 			description: "マージン",
 			table: {
 				type: { summary: "number" },
 			},
 		},
-		mt: {
+		marginTop: {
 			control: { type: "number" },
 			description: "マージントップ",
 			table: {
 				type: { summary: "number" },
 			},
 		},
-		mr: {
+		marginRight: {
 			control: { type: "number" },
 			description: "マージンライト",
 			table: {
 				type: { summary: "number" },
 			},
 		},
-		mb: {
+		marginBottom: {
 			control: { type: "number" },
 			description: "マージンボトム",
 			table: {
 				type: { summary: "number" },
 			},
 		},
-		ml: {
+		marginLeft: {
 			control: { type: "number" },
 			description: "マージンレフト",
 			table: {
 				type: { summary: "number" },
 			},
 		},
-		p: {
+		padding: {
 			control: { type: "number" },
 			description: "パディング",
 			table: {
 				type: { summary: "number" },
 			},
 		},
-		pt: {
+		paddingTop: {
 			control: { type: "number" },
 			description: "パディングトップ",
 			table: {
 				type: { summary: "number" },
 			},
 		},
-		pr: {
+		paddingRight: {
 			control: { type: "number" },
 			description: "パディングライト",
 			table: {
 				type: { summary: "number" },
 			},
 		},
-		pb: {
+		paddingBottom: {
 			control: { type: "number" },
 			description: "パディングボトム",
 			table: {
 				type: { summary: "number" },
 			},
 		},
-		pl: {
+		paddingLeft: {
 			control: { type: "number" },
 			description: "パディングレフト",
 			table: {
