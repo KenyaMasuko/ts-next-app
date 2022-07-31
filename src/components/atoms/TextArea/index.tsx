@@ -69,7 +69,7 @@ const TextArea = (props: TextAreaProps) => {
 				e.target.rows = currentRows;
 			}
 
-			if (currentRows >= previousRows) {
+			if (currentRows >= maxRows) {
 				e.target.rows = maxRows;
 				e.target.scrollTop = e.target.scrollHeight;
 			}
