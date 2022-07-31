@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 //inputのコンポーネント
 const Input = styled.input<{ hasBorder?: boolean; hasError?: boolean }>`
 	color: ${({ theme }) => theme.colors.text};
-	${({ hasBorder, hasError, theme }) => {
+	${({ theme, hasBorder, hasError }) => {
 		if (hasBorder) {
 			return css`
 				border: 1px solid

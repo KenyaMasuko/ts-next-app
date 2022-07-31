@@ -13,7 +13,7 @@ export default {
 		},
 		hasBorder: {
 			control: { type: "boolean" },
-			defaultValue: "true",
+			defaultValue: true,
 			description: "ボーダーフラグ",
 			table: {
 				type: { summary: "boolean" },
@@ -21,7 +21,7 @@ export default {
 		},
 		hasError: {
 			control: { type: "boolean" },
-			defaultValue: "false",
+			defaultValue: false,
 			description: "バリデーションエラーフラグ",
 			table: {
 				type: { summary: "boolean" },
