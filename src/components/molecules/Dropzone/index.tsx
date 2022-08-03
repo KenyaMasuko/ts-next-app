@@ -252,4 +252,9 @@ const Dropzone = (props: DropzoneProps) => {
 	);
 };
 
+Dropzone.defaultProps = {
+	acceptedFileTypes: ["image/png", "image/jpeg", "image/jpg", "image/gif"],
+	hasError: false,
+};
+
 export { Dropzone };
