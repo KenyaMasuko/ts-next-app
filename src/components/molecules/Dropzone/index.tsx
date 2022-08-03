@@ -14,6 +14,7 @@ import styled from "styled-components";
 /**
  * ファイルをドラッグしているかどうか
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isDragEvt = (value: any): value is DragEvent => {
 	// return Boolean(value.dataTransfer);
 	//渡ってきた値をbooleanに変える
@@ -48,7 +49,6 @@ type FileType =
 	| "image/jpeg"
 	| "image/jpg"
 	| "image/gif"
-	| "image/mp4"
 	| "video/mp4"
 	| "video/quicktime"
 	| "application/pdf";
@@ -157,7 +157,7 @@ const Dropzone = (props: DropzoneProps) => {
 
 		const files = value.concat(
 			getFileFromEvent(e).filter((f) => {
-				acceptedFileTypes.includes(f.type as FileType);
+				return acceptedFileTypes.includes(f.type as FileType);
 			})
 		);
 
@@ -173,7 +173,7 @@ const Dropzone = (props: DropzoneProps) => {
 
 		const files = value.concat(
 			getFileFromEvent(e).filter((f) => {
-				acceptedFileTypes.includes(f.type as FileType);
+				return acceptedFileTypes.includes(f.type as FileType);
 			})
 		);
 
