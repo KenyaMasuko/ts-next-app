@@ -65,6 +65,8 @@
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.3",
     "glob-parent": "^5.1.2",
+    "trim": "^0.0.3",
+    "trim-newlines": "^3.0.1",
     "typescript": "4.7.4"
   },
   "readme": "ERROR: No README data found!",
