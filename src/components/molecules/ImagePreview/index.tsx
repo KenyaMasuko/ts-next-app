@@ -1,10 +1,12 @@
 import { CloseIcon } from "components/atoms/IconButton";
+import Box from "components/layout/Box";
 import Flex from "components/layout/Flex";
 import { ComponentProps, FC } from "react";
 import styled from "styled-components";
 
-const ImagePreviewContainer = styled.div`
+const ImagePreviewContainer = styled(Box)`
 	position: relative;
+	/* width: fit-content; */
 `;
 
 //閉じるボタン
@@ -54,10 +56,12 @@ export const ImagePreview: FC<ImagePreviewProps> = ({
 		e.preventDefault();
 		e.stopPropagation();
 		onRemove && src && onRemove(src);
+
+		return false;
 	};
 
 	return (
-		<ImagePreviewContainer>
+		<ImagePreviewContainer width={width} height={height}>
 			<img src={src} alt={alt} height={height} width={width} />
 			<CloseBox
 				alignItems="center"

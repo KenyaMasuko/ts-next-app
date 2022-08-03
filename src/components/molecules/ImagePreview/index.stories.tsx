@@ -1,9 +1,8 @@
-import { useEffect } from "@storybook/addons";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { ImagePreview } from ".";
-import { Dropzone } from "../Dropzone";
+import { ImagePreview } from "./";
+import { Dropzone } from "components/molecules/Dropzone";
 
 export default {
 	title: "Molecules/ImagePreview",
@@ -75,6 +74,7 @@ const Template: ComponentStory<typeof ImagePreview> = (args) => {
 			}
 		}
 		setImages(newImages);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [files]);
 
 	const handleRemove = (src: string) => {
@@ -82,7 +82,7 @@ const Template: ComponentStory<typeof ImagePreview> = (args) => {
 
 		if (image !== undefined) {
 			setImages((images) => images.filter((img) => img.src !== image.src));
-			setFiles((files) => files.filter((file) => file !== image.file));
+			setFiles((files) => files.filter((file: File) => file !== image.file));
 		}
 
 		args && args.onRemove && args.onRemove(src);
