@@ -36,3 +36,6 @@ yarn-error.log*
 
 # storybook build log
 build-storybook.log
+
+# .vscode
+.vscode
