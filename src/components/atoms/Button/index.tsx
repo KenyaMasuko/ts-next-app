@@ -93,7 +93,7 @@ const variants = {
 			},
 		},
 	},
-};
+} as const;
 
 /**
  * ボタン

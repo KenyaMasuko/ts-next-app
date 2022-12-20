@@ -80,7 +80,7 @@ const variants = {
 		letterSpacing: 5,
 		lineHeight: 5,
 	},
-};
+} as const;
 /**
  * テキスト
  * バリアント、フォントサイズ、カーニング、ラインハイト関連のPropsを追加
