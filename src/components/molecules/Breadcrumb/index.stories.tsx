@@ -1,21 +1,21 @@
 import { ComponentMeta } from "@storybook/react";
-import { BreadcrumbItem } from "components/atoms/BreadcrumbItem";
 import { Breadcrumb } from ".";
+import { BreadcrumbItem } from "components/atoms/BreadcrumbItem";
 
 export default { title: "Molecules/Breadcrumb" } as ComponentMeta<
-	typeof Breadcrumb
+  typeof Breadcrumb
 >;
 
 export const Standard = () => {
-	return (
-		<Breadcrumb>
-			<BreadcrumbItem>
-				<a href="#">Top</a>
-			</BreadcrumbItem>
-			<BreadcrumbItem>
-				<a href="#">Clothes</a>
-			</BreadcrumbItem>
-			<BreadcrumbItem>Item</BreadcrumbItem>
-		</Breadcrumb>
-	);
+  return (
+    <Breadcrumb>
+      <BreadcrumbItem>
+        <a href="#">Top</a>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <a href="#">Clothes</a>
+      </BreadcrumbItem>
+      <BreadcrumbItem>Item</BreadcrumbItem>
+    </Breadcrumb>
+  );
 };

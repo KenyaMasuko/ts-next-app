@@ -9,13 +9,13 @@ type ShapeImageProps = ImageProps & { shape?: ImageShape };
 
 // circleなら円形に
 const ImageWidthShape = styled(Image)<{ shape?: ImageShape }>`
-	border-radius: ${({ shape }) => (shape === "circle" ? "50%" : "0")};
+  border-radius: ${({ shape }) => (shape === "circle" ? "50%" : "0")};
 `;
 
 //shapeImageのコンポーネント
 const ShapeImage = (props: ShapeImageProps) => {
-	const { shape, ...imageProps } = props;
-	return <ImageWidthShape shape={shape} {...imageProps} />;
+  const { shape, ...imageProps } = props;
+  return <ImageWidthShape shape={shape} {...imageProps} />;
 };
 
 export { type ImageShape, type ShapeImageProps, ShapeImage };

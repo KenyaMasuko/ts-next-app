@@ -1,32 +1,32 @@
 import { createContext, PropsWithChildren, useContext } from "react";
+import useSWR from "swr";
 import { signin } from "services/auth/signin";
 import signout from "services/auth/signout";
-import useSWR from "swr";
 import { ApiContext, User } from "types";
 
 type AuthContextType = {
-	authUser?: User;
-	isLoading: boolean;
-	signin: (usename: string, password: string) => Promise<void>;
-	signout: () => Promise<void>;
-	mutate: (
-		data?: User | Promise<User>,
-		shouldRevalidate?: boolean
-	) => Promise<User | undefined>;
+  authUser?: User;
+  isLoading: boolean;
+  signin: (usename: string, password: string) => Promise<void>;
+  signout: () => Promise<void>;
+  mutate: (
+    data?: User | Promise<User>,
+    shouldRevalidate?: boolean,
+  ) => Promise<User | undefined>;
 };
 
 type AuthContextProviderProps = {
-	context: ApiContext;
-	authUser?: User;
+  context: ApiContext;
+  authUser?: User;
 };
 
 // homework Promise.resolve() → Promiseでラップされた値が返却される？
 const AuthContext = createContext<AuthContextType>({
-	authUser: undefined,
-	isLoading: false,
-	signin: async () => Promise.resolve(),
-	signout: async () => Promise.resolve(),
-	mutate: async () => Promise.resolve(undefined),
+  authUser: undefined,
+  isLoading: false,
+  signin: async () => Promise.resolve(),
+  signout: async () => Promise.resolve(),
+  mutate: async () => Promise.resolve(undefined),
 });
 
 export const useAuthContext = (): AuthContextType => useContext(AuthContext);
@@ -36,38 +36,38 @@ export const useAuthContext = (): AuthContextType => useContext(AuthContext);
  * @param params パラメーター
  */
 export const AuthContextProvider = ({
-	context,
-	authUser,
-	children,
+  context,
+  authUser,
+  children,
 }: PropsWithChildren<AuthContextProviderProps>) => {
-	const { data, error, mutate } = useSWR(
-		`${context.apiRootUrl.replace(/\/$/g, "")}/users/me`
-	);
-	const isLoading = !data && !error;
+  const { data, error, mutate } = useSWR(
+    `${context.apiRootUrl.replace(/\/$/g, "")}/users/me`,
+  );
+  const isLoading = !data && !error;
 
-	//サインイン
-	const signinInternal = async (username: string, password: string) => {
-		await signin(context, { username, password });
-		await mutate();
-	};
+  //サインイン
+  const signinInternal = async (username: string, password: string) => {
+    await signin(context, { username, password });
+    await mutate();
+  };
 
-	//サインアウト
-	const signoutInternal = async () => {
-		await signout(context);
-		await mutate();
-	};
+  //サインアウト
+  const signoutInternal = async () => {
+    await signout(context);
+    await mutate();
+  };
 
-	return (
-		<AuthContext.Provider
-			value={{
-				authUser: data ?? authUser,
-				isLoading,
-				signin: signinInternal,
-				signout: signoutInternal,
-				mutate,
-			}}
-		>
-			{children}
-		</AuthContext.Provider>
-	);
+  return (
+    <AuthContext.Provider
+      value={{
+        authUser: data ?? authUser,
+        isLoading,
+        signin: signinInternal,
+        signout: signoutInternal,
+        mutate,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };

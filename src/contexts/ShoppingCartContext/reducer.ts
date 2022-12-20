@@ -4,14 +4,14 @@ export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 
 type ShopReducerAction =
-	| {
-			type: "ADD_PRODUCT";
-			payload: Product;
-	  }
-	| {
-			type: "REMOVE_PRODUCT";
-			payload: number;
-	  };
+  | {
+      type: "ADD_PRODUCT";
+      payload: Product;
+    }
+  | {
+      type: "REMOVE_PRODUCT";
+      payload: number;
+    };
 
 /**
  * 商品追加アクション
@@ -20,7 +20,7 @@ type ShopReducerAction =
  * @returns 商品を追加したカートの状態
  */
 const addProductToCart = (product: Product, state: Product[]) => {
-	return [...state, product];
+  return [...state, product];
 };
 
 /**
@@ -30,9 +30,9 @@ const addProductToCart = (product: Product, state: Product[]) => {
  * @returns 商品を削除したカートの状態
  */
 const removeProductFromCart = (productId: number, state: Product[]) => {
-	const removeItemIndex = state.findIndex((item) => item.id === productId);
-	state.splice(removeItemIndex, 1);
-	return [...state];
+  const removeItemIndex = state.findIndex((item) => item.id === productId);
+  state.splice(removeItemIndex, 1);
+  return [...state];
 };
 
 /**
@@ -42,15 +42,15 @@ const removeProductFromCart = (productId: number, state: Product[]) => {
  * @returns 処理後のカートの状態
  */
 export const shopReducer = (state: Product[], action: ShopReducerAction) => {
-	switch (action.type) {
-		case "ADD_PRODUCT": {
-			return addProductToCart(action.payload, state);
-		}
-		case "REMOVE_PRODUCT": {
-			return removeProductFromCart(action.payload, state);
-		}
-		default: {
-			return state;
-		}
-	}
+  switch (action.type) {
+    case "ADD_PRODUCT": {
+      return addProductToCart(action.payload, state);
+    }
+    case "REMOVE_PRODUCT": {
+      return removeProductFromCart(action.payload, state);
+    }
+    default: {
+      return state;
+    }
+  }
 };

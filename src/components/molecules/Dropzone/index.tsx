@@ -1,31 +1,31 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
-import { CloudUploadIcon } from "components/atoms/IconButton";
 import {
-	ChangeEvent,
-	DragEvent,
-	useCallback,
-	useEffect,
-	useRef,
-	useState,
+  ChangeEvent,
+  DragEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
 } from "react";
 import styled from "styled-components";
+import { CloudUploadIcon } from "components/atoms/IconButton";
 
 /**
  * ファイルをドラッグしているかどうか
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isDragEvt = (value: any): value is DragEvent => {
-	// return Boolean(value.dataTransfer);
-	//渡ってきた値をbooleanに変える
-	return !!value.dataTransfer;
+  // return Boolean(value.dataTransfer);
+  //渡ってきた値をbooleanに変える
+  return !!value.dataTransfer;
 };
 
 /**
  * inputのイベントでファイルを選択しているかどうか
  */
 const isInput = (value: EventTarget | null): value is HTMLInputElement => {
-	return value !== null;
+  return value !== null;
 };
 
 /**
@@ -34,102 +34,102 @@ const isInput = (value: EventTarget | null): value is HTMLInputElement => {
  * @returns Fileの配列
  */
 const getFileFromEvent = (e: DragEvent | ChangeEvent): File[] => {
-	if (isDragEvt(e)) {
-		return Array.from(e.dataTransfer.files);
-	} else if (isInput(e.target) && e.target.files) {
-		return Array.from(e.target.files);
-	}
+  if (isDragEvt(e)) {
+    return Array.from(e.dataTransfer.files);
+  } else if (isInput(e.target) && e.target.files) {
+    return Array.from(e.target.files);
+  }
 
-	return [];
+  return [];
 };
 
 //ファイルのContent-Type
 type FileType =
-	| "image/png"
-	| "image/jpeg"
-	| "image/jpg"
-	| "image/gif"
-	| "video/mp4"
-	| "video/quicktime"
-	| "application/pdf";
+  | "image/png"
+  | "image/jpeg"
+  | "image/jpg"
+  | "image/gif"
+  | "video/mp4"
+  | "video/quicktime"
+  | "application/pdf";
 
 interface DropzoneProps {
-	/**
-	 * 入力ファイル
-	 */
-	value?: File[];
-	/**
-	 * <input /> のname属性
-	 */
-	name?: string;
-	/**
-	 * 許可されるファイルタイプ
-	 */
-	acceptedFileTypes?: FileType[];
-	/**
-	 * 横幅
-	 */
-	width?: number | string;
-	/**
-	 * 縦幅
-	 */
-	height?: number | string;
-	/**
-	 * バリデーションエラーフラグ
-	 */
-	hasError?: boolean;
-	/**
-	 * ファイルがドロップ入力された時のイベントハンドラ
-	 */
-	onDrop?: (files: File[]) => void;
-	/**
-	 * ファイルが入力された時のイベントハンドラ
-	 */
-	onChange?: (files: File[]) => void;
+  /**
+   * 入力ファイル
+   */
+  value?: File[];
+  /**
+   * <input /> のname属性
+   */
+  name?: string;
+  /**
+   * 許可されるファイルタイプ
+   */
+  acceptedFileTypes?: FileType[];
+  /**
+   * 横幅
+   */
+  width?: number | string;
+  /**
+   * 縦幅
+   */
+  height?: number | string;
+  /**
+   * バリデーションエラーフラグ
+   */
+  hasError?: boolean;
+  /**
+   * ファイルがドロップ入力された時のイベントハンドラ
+   */
+  onDrop?: (files: File[]) => void;
+  /**
+   * ファイルが入力された時のイベントハンドラ
+   */
+  onChange?: (files: File[]) => void;
 }
 
 type DropzoneRootProps = {
-	isFocused?: boolean;
-	hasError?: boolean;
-	width: number | string;
-	height: number | string;
+  isFocused?: boolean;
+  hasError?: boolean;
+  width: number | string;
+  height: number | string;
 };
 
 //ドロップゾーンの外側の外観
 const DropzoneRoot = styled.div<DropzoneRootProps>`
-	border: 1px dashed
-		${({ hasError, theme, isFocused }) => {
-			if (hasError) {
-				return theme.colors.danger;
-			} else if (isFocused) {
-				return theme.colors.black;
-			} else {
-				return theme.colors.border;
-			}
-		}};
-	border-radius: 8px;
-	cursor: pointer;
-	width: ${({ width }) => (typeof width === "number" ? `${width}px` : width)};
-	height: ${({ height }) =>
-		typeof height === "number" ? `${height}px` : height};
+  border: 1px dashed
+    ${({ hasError, theme, isFocused }) => {
+      if (hasError) {
+        return theme.colors.danger;
+      } else if (isFocused) {
+        return theme.colors.black;
+      } else {
+        return theme.colors.border;
+      }
+    }};
+  border-radius: 8px;
+  cursor: pointer;
+  width: ${({ width }) => (typeof width === "number" ? `${width}px` : width)};
+  height: ${({ height }) =>
+    typeof height === "number" ? `${height}px` : height};
 `;
 
 //ドロップゾーンの中身
 const DropzoneContent = styled.div<{
-	width: number | string;
-	height: number | string;
+  width: number | string;
+  height: number | string;
 }>`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: ${({ width }) => (typeof width === "number" ? `${width}px` : width)};
-	height: ${({ height }) =>
-		typeof height === "number" ? `${height}px` : height};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: ${({ width }) => (typeof width === "number" ? `${width}px` : width)};
+  height: ${({ height }) =>
+    typeof height === "number" ? `${height}px` : height};
 `;
 
 const DropzoneInputFile = styled.input`
-	display: none;
+  display: none;
 `;
 
 /**
@@ -137,124 +137,124 @@ const DropzoneInputFile = styled.input`
  * ファイルの入力を受け付ける
  */
 const Dropzone = (props: DropzoneProps) => {
-	const {
-		onDrop,
-		onChange,
-		value = [],
-		name,
-		acceptedFileTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"],
-		hasError,
-		width = "100%",
-		height = "200px",
-	} = props;
+  const {
+    onDrop,
+    onChange,
+    value = [],
+    name,
+    acceptedFileTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif"],
+    hasError,
+    width = "100%",
+    height = "200px",
+  } = props;
 
-	const rootRef = useRef<HTMLDivElement>(null);
-	const inputRef = useRef<HTMLInputElement>(null);
-	const [isFocused, setIsFocused] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [isFocused, setIsFocused] = useState(false);
 
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setIsFocused(false);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsFocused(false);
 
-		const files = value.concat(
-			getFileFromEvent(e).filter((f) => {
-				return acceptedFileTypes.includes(f.type as FileType);
-			})
-		);
+    const files = value.concat(
+      getFileFromEvent(e).filter((f) => {
+        return acceptedFileTypes.includes(f.type as FileType);
+      }),
+    );
 
-		onDrop && onDrop(files);
-		onChange && onChange(files);
-	};
+    onDrop && onDrop(files);
+    onChange && onChange(files);
+  };
 
-	//ドラッグ状態のマウスポインタが範囲以内でドロップされた時
-	const handleDrop = (e: DragEvent<HTMLDivElement>) => {
-		e.preventDefault();
-		e.stopPropagation();
-		setIsFocused(false);
+  //ドラッグ状態のマウスポインタが範囲以内でドロップされた時
+  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsFocused(false);
 
-		const files = value.concat(
-			getFileFromEvent(e).filter((f) => {
-				return acceptedFileTypes.includes(f.type as FileType);
-			})
-		);
+    const files = value.concat(
+      getFileFromEvent(e).filter((f) => {
+        return acceptedFileTypes.includes(f.type as FileType);
+      }),
+    );
 
-		if (files.length == 0) {
-			return window.alert(
-				`次のフォーマットでは指定できません${acceptedFileTypes.join(" ,")})`
-			);
-		}
+    if (files.length == 0) {
+      return window.alert(
+        `次のフォーマットでは指定できません${acceptedFileTypes.join(" ,")})`,
+      );
+    }
 
-		onDrop && onDrop(files);
-		onChange && onChange(files);
-	};
+    onDrop && onDrop(files);
+    onChange && onChange(files);
+  };
 
-	//ドラッグ状態のマウスポインタが範囲内に入っている時
-	const handleDragOver = useCallback((e: DragEvent<HTMLDivElement>) => {
-		e.preventDefault();
-		e.stopPropagation();
-	}, []);
+  //ドラッグ状態のマウスポインタが範囲内に入っている時
+  const handleDragOver = useCallback((e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  }, []);
 
-	//ドラッグ状態のマウスポインタが範囲外に消えた時にフォーカスを外す
-	const handleDragLeave = useCallback((e: DragEvent<HTMLDivElement>) => {
-		e.preventDefault();
-		e.stopPropagation();
-		setIsFocused(false);
-	}, []);
+  //ドラッグ状態のマウスポインタが範囲外に消えた時にフォーカスを外す
+  const handleDragLeave = useCallback((e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsFocused(false);
+  }, []);
 
-	//ドラッグ状態のマウスポインタが範囲内に入った時にフォーカスを当てる
-	const handleDragEnter = useCallback((e: DragEvent<HTMLDivElement>) => {
-		e.preventDefault();
-		e.stopPropagation();
-		setIsFocused(true);
-	}, []);
+  //ドラッグ状態のマウスポインタが範囲内に入った時にフォーカスを当てる
+  const handleDragEnter = useCallback((e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsFocused(true);
+  }, []);
 
-	//ファイル選択ダイアログを表示する
-	const handleClick = () => {
-		inputRef.current?.click();
-	};
+  //ファイル選択ダイアログを表示する
+  const handleClick = () => {
+    inputRef.current?.click();
+  };
 
-	useEffect(() => {
-		if (inputRef.current && value && value.length == 0) {
-			inputRef.current.value = "";
-		}
-	}, [value]);
+  useEffect(() => {
+    if (inputRef.current && value && value.length == 0) {
+      inputRef.current.value = "";
+    }
+  }, [value]);
 
-	return (
-		<>
-			{/* ドラッグ&ドロップイベントを管理 */}
-			<DropzoneRoot
-				ref={rootRef}
-				isFocused={isFocused}
-				onDrop={handleDrop}
-				onDragOver={handleDragOver}
-				onDragLeave={handleDragLeave}
-				onDragEnter={handleDragEnter}
-				onClick={handleClick}
-				hasError={hasError}
-				width={width}
-				height={height}
-				data-testid="dropzone"
-			>
-				{/* ダミーインプット */}
-				<DropzoneInputFile
-					ref={inputRef}
-					type="file"
-					name={name}
-					accept={acceptedFileTypes.join(",")}
-					onChange={handleChange}
-					multiple
-				/>
-				<DropzoneContent width={width} height={height}>
-					<CloudUploadIcon size={24} />
-					<span style={{ textAlign: "center" }}>デバイスからアップロード</span>
-				</DropzoneContent>
-			</DropzoneRoot>
-		</>
-	);
+  return (
+    <>
+      {/* ドラッグ&ドロップイベントを管理 */}
+      <DropzoneRoot
+        ref={rootRef}
+        isFocused={isFocused}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDragEnter={handleDragEnter}
+        onClick={handleClick}
+        hasError={hasError}
+        width={width}
+        height={height}
+        data-testid="dropzone"
+      >
+        {/* ダミーインプット */}
+        <DropzoneInputFile
+          ref={inputRef}
+          type="file"
+          name={name}
+          accept={acceptedFileTypes.join(",")}
+          onChange={handleChange}
+          multiple
+        />
+        <DropzoneContent width={width} height={height}>
+          <CloudUploadIcon size={24} />
+          <span style={{ textAlign: "center" }}>デバイスからアップロード</span>
+        </DropzoneContent>
+      </DropzoneRoot>
+    </>
+  );
 };
 
 Dropzone.defaultProps = {
-	acceptedFileTypes: ["image/png", "image/jpeg", "image/jpg", "image/gif"],
-	hasError: false,
+  acceptedFileTypes: ["image/png", "image/jpeg", "image/jpg", "image/gif"],
+  hasError: false,
 };
 
 export { Dropzone };

@@ -2,23 +2,23 @@ import { ApiContext, User } from "types";
 import { fetcher } from "utils";
 
 export type SignInParams = {
-	username: string;
-	password: string;
+  username: string;
+  password: string;
 };
 
 export const signin = async (
-	context: ApiContext,
-	params: SignInParams
+  context: ApiContext,
+  params: SignInParams,
 ): Promise<User> => {
-	return await fetcher(
-		`${context.apiRootUrl.replace(/\/$/g, "")}/auth/signin`,
-		{
-			method: "POST",
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(params),
-		}
-	);
+  return await fetcher(
+    `${context.apiRootUrl.replace(/\/$/g, "")}/auth/signin`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params),
+    },
+  );
 };

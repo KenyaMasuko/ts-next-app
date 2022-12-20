@@ -16,7 +16,7 @@ export type ProductCardProps = {
 	 */
 	blurDataUrl: string;
 	/**
-	 *　バリアント（表示スタイル）
+	 * バリアント（表示スタイル）
 	 */
 	variant: "listing" | "small" | "detail";
 };
